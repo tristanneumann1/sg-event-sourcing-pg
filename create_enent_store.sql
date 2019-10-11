@@ -10,8 +10,3 @@ CREATE TABLE IF NOT EXISTS event_store (
   category text,
   timestamp BIGINT NOT NULL
 );
-
-SELECT * from event_store
-WHERE pp_practice_id=90008;
-
-
