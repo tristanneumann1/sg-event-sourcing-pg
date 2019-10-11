@@ -27,7 +27,7 @@ for (let i = 0; i < N; i++) {
   event.category = eventCategories;
   event.timestamp = Math.floor(new Date(faker.date.past()).getTime() / 1000);
 
-  writes.push(stream.write(JSON.stringify(event) + '\n', (err) => {
+  writes.push(stream.write(event.event + ';' + JSON.stringify(event) + '\n', (err) => {
     if (err) {
       console.error(err)
     } else if ( i % 10 === 0) {
