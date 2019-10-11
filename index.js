@@ -2,16 +2,9 @@ const EventStore = require('./eventStore');
 const { Pool } = require('pg');
 const Cursor = require('pg-cursor');
 
-// Projection
-const CountEvents = function () {
-  let counter = 0;
-  return {
-    projection: _ => counter++,
-    result: () => { return counter }
-  }
-}
+const Projection = require('./projections/countEventsByPractice.js').Projection;
 
-const eventscount = new CountEvents();
+const projection = new Projection();
 
 
 // Connection
@@ -27,7 +20,7 @@ pool.connect((err, client) => {
     throw err;
   }
   const cursor = client.query(new Cursor(query))
-  runProjection(eventscount, cursor)
+  runProjection(projection, cursor)
 });
 
 function runProjection(projector, cursor) {
